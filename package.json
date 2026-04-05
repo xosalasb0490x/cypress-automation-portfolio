@@ -1,27 +1,34 @@
 {
-  "name": "cypress-automation-portfolio",
-  "version": "1.0.0",
-  "description": "",
-  "main": "cypress.config.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/xosalasb0490x/cypress-automation-portfolio.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
-  "bugs": {
-    "url": "https://github.com/xosalasb0490x/cypress-automation-portfolio/issues"
-  },
-  "homepage": "https://github.com/xosalasb0490x/cypress-automation-portfolio#readme",
-  "devDependencies": {
-    "@faker-js/faker": "^10.4.0",
-    "@types/jest": "^30.0.0",
-    "cypress": "^15.13.0",
-    "typescript": "^6.0.2"
-  }
+    "name": "cypress-automation-portfolio",
+    "version": "1.0.0",
+    "description": "",
+    "main": "cypress.config.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "cy:run": "cypress run",
+        "report:merge": "npx mochawesome-merge cypress/reports/*.json > cypress/reports/report.json",
+        "report:generate": "npx marge cypress/reports/report.json -f index -o cypress/reports/html",
+        "test:report": "npm run cy:run && npm run report:merge && npm run report:generate"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/xosalasb0490x/cypress-automation-portfolio.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "type": "commonjs",
+    "bugs": {
+        "url": "https://github.com/xosalasb0490x/cypress-automation-portfolio/issues"
+    },
+    "homepage": "https://github.com/xosalasb0490x/cypress-automation-portfolio#readme",
+    "devDependencies": {
+        "@faker-js/faker": "^10.4.0",
+        "@types/jest": "^30.0.0",
+        "cypress": "^15.13.0",
+        "mochawesome": "^7.1.4",
+        "mochawesome-merge": "^5.1.1",
+        "mochawesome-report-generator": "^6.3.2",
+        "typescript": "^6.0.2"
+    }
 }

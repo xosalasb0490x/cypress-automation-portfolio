@@ -1,5 +1,9 @@
 import { faker } from '@faker-js/faker'
 
+/**
+ * Interface that defines the structure of the user information
+ * required for registration and login flows.
+ */
 interface informationUser {
   name: string,
   lastName: string,
@@ -13,6 +17,13 @@ interface informationUser {
   mobileNumber: string
 }
 
+/**
+ * Custom command to register a new user in the application.
+ * Generates a dynamic email using faker to avoid duplicate user conflicts.
+ * Fills registration form fields and submits account creation request.
+ *
+ * @param user Object containing user registration information
+ */
 Cypress.Commands.add('registerUser', (user: informationUser) => {
   const dynamicEmail = faker.internet.email()
 
@@ -32,6 +43,12 @@ Cypress.Commands.add('registerUser', (user: informationUser) => {
   cy.get('[data-qa="create-account"]').click();
 });
 
+/**
+ * Custom command to log into the application using valid credentials.
+ * Navigates to login page and submits authentication form.
+ *
+ * @param user Object containing login credentials
+ */
 Cypress.Commands.add('loginUser', (user: informationUser) => {
   cy.visit('https://automationexercise.com/login');
   cy.get('[data-qa="login-email"]').type(user.email);
@@ -39,10 +56,25 @@ Cypress.Commands.add('loginUser', (user: informationUser) => {
   cy.get('[data-qa="login-button"]').click();
 });
 
+/**
+ * Custom command that retrieves login error message displayed
+ * when authentication credentials are invalid.
+ *
+ * Used for negative login validation scenarios.
+ *
+ * @returns Cypress chainable element containing error message
+ */
 Cypress.Commands.add('getLoginError', () => {
   cy.contains('Your email or password is incorrect!');
 });
 
+/**
+ * Custom command that returns logout button element.
+ *
+ * Used to validate session state or perform logout actions.
+ *
+ * @returns Cypress chainable logout button element
+ */
 Cypress.Commands.add('logoutButton', () => {
   cy.get('a[href="/logout"]');
 });
