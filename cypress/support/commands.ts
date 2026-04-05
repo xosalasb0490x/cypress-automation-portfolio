@@ -13,7 +13,7 @@ interface informationUser {
   mobileNumber: string
 }
 
-Cypress.Commands.add('registerUser', (user : informationUser) => {
+Cypress.Commands.add('registerUser', (user: informationUser) => {
   const dynamicEmail = faker.internet.email()
 
   cy.visit('https://automationexercise.com/login');
@@ -32,10 +32,28 @@ Cypress.Commands.add('registerUser', (user : informationUser) => {
   cy.get('[data-qa="create-account"]').click();
 });
 
+Cypress.Commands.add('loginUser', (user: informationUser) => {
+  cy.visit('https://automationexercise.com/login');
+  cy.get('[data-qa="login-email"]').type(user.email);
+  cy.get('[data-qa="login-password"]').type(user.password);
+  cy.get('[data-qa="login-button"]').click();
+});
+
+Cypress.Commands.add('getLoginError', () => {
+  cy.contains('Your email or password is incorrect!');
+});
+
+Cypress.Commands.add('logoutButton', () => {
+  cy.get('a[href="/logout"]');
+});
+
 declare global {
   namespace Cypress {
     interface Chainable {
-      registerUser( user : informationUser): Chainable<void>
+      registerUser(user: informationUser): Chainable<void>;
+      loginUser(user: informationUser): Chainable<void>;
+      getLoginError(): Chainable<void>;
+      logoutButton(): Chainable<void>;
     }
   }
 }
