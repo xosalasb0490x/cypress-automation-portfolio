@@ -8,6 +8,7 @@ describe('Login (https://automationexercise.com)', () => {
         cy.getLoginError()
             .should('exist')
             .should('be.visible');
+        // cy.screenshot('login-fail');
     });
 
     it('Should login an user with valid credentials successfully.', function () {
